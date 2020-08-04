@@ -17,8 +17,8 @@ export default {
     name: "AddTodo",
     data() {
         return {
-            title: ''
-        }
+            title: ""
+        };
     },
     methods: {
         ...mapActions(['addTodo']),

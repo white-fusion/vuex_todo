@@ -1,6 +1,6 @@
 <template>
     <div>
-        Filter Todos
+        Filter Todos:
         <select @change="filterTodos($event)">
             <option value="200">200</option>
             <option value="100">100</option>
