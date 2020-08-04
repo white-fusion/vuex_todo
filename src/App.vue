@@ -3,20 +3,22 @@
     <div class="container">
       <AddTodo />
       <Todos />
+      <HomePage />
     </div>
   </div>
 </template>
 
 <script>
-import Todos from './components/Todos.vue'
-import AddTodo from './components/AddTodo.vue'
-
+import Todos from './components/Todos.vue';
+import AddTodo from './components/AddTodo.vue';
+import HomePage from './components/HomePage.vue';
 
 export default {
   name: 'App',
   components: {
     Todos,
-    AddTodo
+    AddTodo,
+    HomePage
   }
 }
 </script>
