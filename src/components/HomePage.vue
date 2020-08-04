@@ -1,17 +1,19 @@
 <template>
-    <div>
+    <div class="container">
+        <AddTodo />
         <div class="addCateg">
-            <h2>Todo List App</h2>
+            <h2>Categories</h2>
             <div class="add">
                 <form @submit="onSubmit">
-                    <input type="text" v-model="title" placeholder="Add Category ...">
-                    <input type="submit" value="Submit">
+                    <input type="text" v-model="title" placeholder="Add New Category ...">
+                    <input type="submit" value="Add">
                 </form>
             </div>
         </div>
+        <h3>Double click to view todos of a specific category</h3>
         <div class="categories">
             <div
-            @click="updateTodo(todo.id)"
+            @dblclick="openCategory(category.title)"
             v-for="category in allCategories"
             :key="category.id"
             class="category"
@@ -25,11 +27,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import AddTodo from './AddTodo.vue';
 
 export default {
     name: "HomePage",
     data() {
         return {
+            title: "",
             newId: 4,
         };
     },
@@ -40,9 +44,15 @@ export default {
             this.addCategory(this);
             this.newId++;
             this.title = '';
+        },
+        openCategory(name) {
+            this.$router.push({ name: 'Categs', params: { title: name}});
         }
     },
     computed: mapGetters(["allCategories"]),
+    components: {
+    AddTodo
+  }
 }
 </script>
 
@@ -87,5 +97,11 @@ i {
   right: 10px;
   color: #fff;
   cursor: pointer;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  overflow: auto;
+  padding: 0 2rem;
 }
 </style>

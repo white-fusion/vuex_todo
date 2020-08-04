@@ -44,7 +44,7 @@ const actions = {
   },
   async addCategory({ commit }, rcvd) {
     const category = {
-      id: rcvd.id,
+      id: rcvd.newId,
       title: rcvd.title
     };
     commit('newCategory', category);

@@ -23,14 +23,15 @@ export default {
         return {
             title: "",
             newId: 0,
-            category: ""
+            category: "Home"
         };
     },
     methods: {
         ...mapActions(['addTodo']),
         onSubmit(e) {
             e.preventDefault();
-            this.category = document.getElementById("myList").value;
+            if(document.getElementById("myList").value !=='')
+                this.category = document.getElementById("myList").value;
             this.addTodo(this);
             this.newId++;
             this.title = '';
