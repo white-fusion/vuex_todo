@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Add Todo</h3>
+        <h2>Todo List App</h2>
         <div class="add">
             <form @submit="onSubmit">
                 <input type="text" v-model="title" placeholder="Add Todo ...">
@@ -17,14 +17,17 @@ export default {
     name: "AddTodo",
     data() {
         return {
-            title: ""
+            title: "",
+            newId: 0
         };
     },
     methods: {
         ...mapActions(['addTodo']),
         onSubmit(e) {
             e.preventDefault();
-            this.addTodo(this.title);
+            this.addTodo(this);
+            this.newId++;
+            this.title = '';
         }
     }
 }

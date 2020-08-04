@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3>Todos</h3>
     <div class="legend">
       <span>Double click to mark as complete</span>
       <span>
@@ -12,7 +11,7 @@
     </div>
     <div class="todos">
       <div
-        @dblclick="onDblClick(todo)"
+        @dblclick="updateTodo(todo.id)"
         v-for="todo in allTodos"
         :key="todo.id"
         class="todo"
@@ -30,20 +29,9 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Todos",
   methods: {
-    ...mapActions(["fetchTodos", "deleteTodo", "updateTodo"]),
-    onDblClick(todo) {
-      const updTodo = {
-        id: todo.id,
-        title: todo.title,
-        completed: !todo.completed
-      };
-      this.updateTodo(updTodo);
-    }
+    ...mapActions([ "deleteTodo", "updateTodo"])
   },
   computed: mapGetters(["allTodos"]),
-  created() {
-    this.fetchTodos();
-  }
 };
 </script>
 
