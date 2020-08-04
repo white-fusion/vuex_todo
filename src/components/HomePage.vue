@@ -10,14 +10,15 @@
             </div>
         </div>
         <div class="categories">
-        <div
+            <div
             @click="updateTodo(todo.id)"
             v-for="category in allCategories"
             :key="category.id"
             class="category"
-        >
-            {{ category.title }}
-        </div>
+            >
+                {{ category.title }}
+                <i @click="deleteCategory(category.id)" class="fas fa-trash-alt"></i>
+            </div>
         </div>
     </div> 
 </template>
@@ -33,10 +34,10 @@ export default {
         };
     },
     methods: {
-        ...mapActions(['addCateg']),
+        ...mapActions(['addCategory', 'deleteCategory']),
         onSubmit(e) {
             e.preventDefault();
-            this.addCateg(this);
+            this.addCategory(this);
             this.newId++;
             this.title = '';
         }
@@ -47,18 +48,19 @@ export default {
 
 <style scoped>
 .categories {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1rem;
 }
 .category {
-  border: 1px solid #ccc;
-  background: #0d7516;
-  padding: 1rem;
-  border-radius: 5px;
-  text-align: center;
-  position: relative;
-  cursor: pointer;
+    color: white;
+    border: 1px solid #ccc;
+    background: #750d0d;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
 }
 
 form{
@@ -78,5 +80,12 @@ input[type='submit']{
     color:#fff;
     border: 1px #b84141 solid;
     cursor: pointer;
+}
+i {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #fff;
+  cursor: pointer;
 }
 </style>

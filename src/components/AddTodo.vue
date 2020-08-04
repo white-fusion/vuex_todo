@@ -4,6 +4,10 @@
         <div class="add">
             <form @submit="onSubmit">
                 <input type="text" v-model="title" placeholder="Add Todo ...">
+                <select id ="myList">
+                    <option value="" disabled selected>Choose Category</option>
+                    <option v-for="categ in allCategories" :key="categ.id" :value=categ.title>{{categ.title}}</option>
+                </select>
                 <input type="submit" value="Submit">
             </form>
         </div>
@@ -11,25 +15,28 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: "AddTodo",
     data() {
         return {
             title: "",
-            newId: 0
+            newId: 0,
+            category: ""
         };
     },
     methods: {
         ...mapActions(['addTodo']),
         onSubmit(e) {
             e.preventDefault();
+            this.category = document.getElementById("myList").value;
             this.addTodo(this);
             this.newId++;
             this.title = '';
         }
-    }
+    },
+    computed: mapGetters(["allCategories"]),
 }
 </script>
 

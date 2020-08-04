@@ -31,7 +31,8 @@ const actions = {
     const todo = {
         id: rcvd.newId,
         title: rcvd.title,
-        completed: false
+        completed: false,
+        category: rcvd.category
     };  
     commit('newTodo', todo);
   },
@@ -41,13 +42,16 @@ const actions = {
   async updateTodo({ commit }, id) {
     commit('markTodo', id);
   },
-  async addCateg({ commit }, rcvd) {
-    const categ = {
+  async addCategory({ commit }, rcvd) {
+    const category = {
       id: rcvd.id,
       title: rcvd.title
     };
-    commit('newCateg', categ);
-  }
+    commit('newCategory', category);
+  },
+  async deleteCategory({ commit }, id) {
+    commit('removeCategory', id);
+  },
 };
 
 const mutations = {
@@ -58,7 +62,12 @@ const mutations = {
     const item = state.todos.find(todo => todo.id === id);
     item.completed = !item.completed;
   },
-  newCateg: (state, categ) => state.categories.push(categ),
+  newCategory: (state, category) => state.categories.push(category),
+  removeCategory: (state, id) => {
+    //state.todos = state.todos.filter( todo => todo.category !== id); //Implent deletion of all todos 
+    //pertaining to that catefory
+    state.categories = state.categories.filter(category => category.id !== id);
+  }
 };
 
 export default {
